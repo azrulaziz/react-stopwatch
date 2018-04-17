@@ -16,8 +16,11 @@ class EditableStopwatch extends Component {
 // component to display a single stopwatch
 const Stopwatch = () => {
     return (
-        <div>
-            <p>Stopwatch</p>
+        <div style={{border: "1px solid black", width: "300px"}}>
+            <h2>Task Title</h2>
+            <p>Task description</p>
+            <h3>01:00:00</h3>
+            <button>Start</button>
         </div>
     )
 }
@@ -26,7 +29,7 @@ const Stopwatch = () => {
 const StopwatchForm = () => {
     return (
         <div>
-            <p>Stopwatch Edit Form</p>
+            
         </div>
     )
 }
