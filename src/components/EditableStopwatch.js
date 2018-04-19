@@ -20,10 +20,12 @@ class EditableStopwatch extends Component {
         }
     }
 
+    // function to toggle between stopwatch & stopwatch-edit-form
     handleStopwatchToggle = () => {
         this.setState({stopwatchForm: !this.state.stopwatchForm })
     }
 
+    // function to handle stopwatch edit form & updating state based on new input
     handleStopwatchForm = (e) => {
         e.preventDefault();
         const title = e.target.title.value;
@@ -37,11 +39,14 @@ class EditableStopwatch extends Component {
         });
     }
 
+    // function to handle interval
     handleTimer = () => {
         setInterval(() => this.handleSecondsInterval(), 1000);
     }
 
+    // function to update state of the timer in seconds
     handleSecondsInterval = () => {
+        // using the immutability helper func to alter seconds in the timer obj
         const timer = update(this.state.timer, {seconds: {$apply: function(x) {return x + 1}}})
 
         this.setState({timer});
