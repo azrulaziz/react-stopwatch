@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import update from 'immutability-helper';
 
 // components to display either a stopwatch or a stopwatch edit form
 class EditableStopwatch extends Component {
@@ -10,6 +11,11 @@ class EditableStopwatch extends Component {
             stopwatch: {
                 title: `Fifa`,
                 description: `kick everyone's ass`,
+            },
+            timer: {
+                hour: 0,
+                minute: 0,
+                seconds: 0,
             }
         }
     }
@@ -31,8 +37,18 @@ class EditableStopwatch extends Component {
         });
     }
 
+    handleTimer = () => {
+        setInterval(() => this.handleSecondsInterval(), 1000);
+    }
+
+    handleSecondsInterval = () => {
+        const timer = update(this.state.timer, {seconds: {$apply: function(x) {return x + 1}}})
+
+        this.setState({timer});
+    }
+
     render() {
-        const {stopwatchForm, stopwatch} = this.state;
+        const {stopwatchForm, stopwatch, timer} = this.state;
         return (
             <div>
                 {stopwatchForm ? 
@@ -45,8 +61,12 @@ class EditableStopwatch extends Component {
                 : 
                 <Stopwatch 
                     handleStopwatchToggle={this.handleStopwatchToggle}
+                    handleTimer={this.handleTimer}
                     title={stopwatch.title}
                     desc={stopwatch.description}
+                    hour={timer.hour}
+                    minute={timer.minute}
+                    seconds={timer.seconds}
                 />
                 }
             </div>
@@ -56,13 +76,14 @@ class EditableStopwatch extends Component {
 
 // component to display a single stopwatch
 const Stopwatch = (props) => {
+    const {title, desc, hour, minute, seconds, handleStopwatchToggle, handleTimer} = props;
     return (
         <div style={{border: "1px solid black", width: "300px"}}>
-            <h2>{props.title}</h2>
-            <p>{props.desc}</p>
-            <h3>00:00:00</h3>
-            <button>Start</button>
-            <p onClick={props.handleStopwatchToggle}>Edit</p>
+            <h2>{title}</h2>
+            <p>{desc}</p>
+            <h3>{hour}:{minute}:{seconds}</h3>
+            <button onClick={handleTimer}>Start</button>
+            <p onClick={handleStopwatchToggle}>Edit</p>
             <p>Delete</p>
         </div>
     )
