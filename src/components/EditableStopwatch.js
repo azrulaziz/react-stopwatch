@@ -18,6 +18,13 @@ class EditableStopwatch extends Component {
         this.setState({stopwatchForm: !this.state.stopwatchForm })
     }
 
+    handleStopwatchForm = (e) => {
+        e.preventDefault();
+        console.log(e.target.title.value);
+        console.log(e.target.description.value);
+        alert('updated');
+    }
+
     render() {
         const {stopwatchForm, stopwatch} = this.state;
         return (
@@ -25,6 +32,7 @@ class EditableStopwatch extends Component {
                 {stopwatchForm ? 
                 <StopwatchForm 
                     handleStopwatchToggle={this.handleStopwatchToggle}
+                    handleStopwatchForm={this.handleStopwatchForm}
                 /> 
                 : 
                 <Stopwatch 
@@ -56,7 +64,7 @@ const Stopwatch = (props) => {
 const StopwatchForm = (props) => {
     return (
         <div style={{border: "1px solid black", width: "300px"}}>
-            <form>
+            <form onSubmit={props.handleStopwatchForm}>
                 <h4>Title</h4>
                 <input type="text" name="title"/>
                 <h4>Description</h4>
