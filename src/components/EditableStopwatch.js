@@ -7,6 +7,10 @@ class EditableStopwatch extends Component {
 
         this.state = {
             stopwatchForm: false,
+            stopwatch: {
+                title: `Fifa`,
+                description: `kick everyone's ass`,
+            }
         }
     }
 
@@ -15,12 +19,19 @@ class EditableStopwatch extends Component {
     }
 
     render() {
-        const {stopwatchForm} = this.state;
+        const {stopwatchForm, stopwatch} = this.state;
         return (
             <div>
                 {stopwatchForm ? 
-                <StopwatchForm handleStopwatchToggle={this.handleStopwatchToggle}/> : 
-                <Stopwatch handleStopwatchToggle={this.handleStopwatchToggle}/>
+                <StopwatchForm 
+                    handleStopwatchToggle={this.handleStopwatchToggle}
+                /> 
+                : 
+                <Stopwatch 
+                    handleStopwatchToggle={this.handleStopwatchToggle}
+                    title={stopwatch.title}
+                    desc={stopwatch.description}
+                />
                 }
             </div>
         )
@@ -31,9 +42,9 @@ class EditableStopwatch extends Component {
 const Stopwatch = (props) => {
     return (
         <div style={{border: "1px solid black", width: "300px"}}>
-            <h2>Task Title</h2>
-            <p>Task description</p>
-            <h3>01:00:00</h3>
+            <h2>{props.title}</h2>
+            <p>{props.desc}</p>
+            <h3>00:00:00</h3>
             <button>Start</button>
             <p onClick={props.handleStopwatchToggle}>Edit</p>
             <p>Delete</p>
