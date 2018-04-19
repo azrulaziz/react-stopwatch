@@ -21,6 +21,8 @@ const Stopwatch = () => {
             <p>Task description</p>
             <h3>01:00:00</h3>
             <button>Start</button>
+            <p>Edit</p>
+            <p>Delete</p>
         </div>
     )
 }
@@ -28,8 +30,13 @@ const Stopwatch = () => {
 // component to display a stopwatch edit form
 const StopwatchForm = () => {
     return (
-        <div>
-            
+        <div style={{border: "1px solid black", width: "300px"}}>
+            <form>
+                <h4>Title</h4>
+                <input type="text" name="title"/>
+                <h4>Description</h4>
+                <input type="text" name="description"/>
+            </form>
         </div>
     )
 }
